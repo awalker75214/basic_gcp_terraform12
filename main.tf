@@ -105,7 +105,7 @@ output "auto" {
 resource "google_compute_instance" "vm_instance" {
   name         = "vm-instance"
   machine_type = "n2-standard-2"
-  zone         = "us-central1-a"
+  zone         = "asia-northeast1-a"
 
   tags = ["foo", "bar"]
 
@@ -117,7 +117,8 @@ resource "google_compute_instance" "vm_instance" {
   }
 
   network_interface {
-    network = "default"
+    network = "auto-vpc-tf"
+    subnetwork = google_compute_subnetwork.sub-sg.name
 
     access_config {
       // Ephemeral public IP
